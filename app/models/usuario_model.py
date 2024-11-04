@@ -1,15 +1,25 @@
-from sqlalchemy import Colum, String, Integer
-from sqlalchemy.org import declarative_base
+from sqlalchemy import Column, String, Integer
+from sqlalchemy.orm import declarative_base
 from config.database import db
 
-base = declarative_base
+Base = declarative_base()
 
-class Usuario(base):
-    __tabblename__ = "usuarios"
-    
-    id = Colum(integer, primary_key=True, autoincrement=True)
-    nome = Colum(String(150))
-    email = Colum(String(150))
-    senha = Colum(String(150))
 
-    def __init___(self)
+class Usuario(Base):
+    # Definindo características da tabela no banco de dados.
+    __tablename__ = "usuarios"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String(150))
+    email = Column(String(150))
+    senha = Column(String(150))
+
+    # Definindo características da classe.
+    def __init__(self, nome: str, email: str, senha: str):
+        self.nome = nome
+        self.email = email
+        self.senha = senha
+
+
+# Criando tabela no banco de dados.
+Base.metadata.create_all(bind=db)
