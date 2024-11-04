@@ -1,12 +1,3 @@
-""" BANCO DE DADOS
-    -SQL (LINGUAGEM DE CONSULTA ESTRUTURADA)
-    -EXEMPLO:
-        - SELECT * FROM CLIENTES;
-        - iRA CONSULTAR O BD na Tabela Clientes
-
-        -SGBD:
-           -GERENCIAR PERMISSÕES DE ACESSO
-"""
 from services.usuario_service import UsuarioService
 from repositories.usuario_repository import UsuarioRepository
 from config.database import Session
