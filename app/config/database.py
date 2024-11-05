@@ -1,32 +1,9 @@
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from contextlib import contextmanager
 
-# Parâmetros para conexão com BD MySQL.
-db_user = "user"
-db_password = "user_password"
-db_host = "localhost"
-db_port = "3306"
-db_name = "meu_banco"
+DATABASE_URL = "mysql+pymysql://root:password@localhost:3306/senai_db"
 
-# Endereço/caminho para conexão com BD MySQL.
-DATABASE_URL = f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-
-# Conectando ao banco de dados.
-db = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=db)
-session = Session()
-
-
-# Gerenciando sessão.
-@contextmanager
-def get_db():
-    db = Session()
-    try:
-        yield db
-        db.commit()  # Se der certo, faz commit.
-    except Exception as erro:
-        db.rollback()  # Se der errado, desfaz a operação.
-        raise erro  # lança a exceção, informando o erro.
-    finally:
-        db.close()  # Garante o fechamento da sessão.
+engine = create_engine(DATABASE_URL, echo=True)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
