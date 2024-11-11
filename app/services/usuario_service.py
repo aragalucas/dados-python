@@ -1,6 +1,5 @@
-from sqlalchemy.orm import Session
-from app.repositories.usuario_repository import create_usuario, get_usuario_by_email, update_usuario, delete_usuario, get_usuarios
-
+from app.sqlalchemy.orm import Session
+from app.UsuarioRepository import create_usuario, get_usuario_by_email, update_usuario, delete_usuario, get_usuarios
 def add_usuario(db: Session, nome: str, email: str, senha: str):
     if len(senha) < 6:
         raise ValueError("A senha precisa ter pelo menos 6 caracteres.")
