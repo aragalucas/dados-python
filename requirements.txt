@@ -1,2 +1,2 @@
-sqlalchemy
-pymysql
+import app.sqlalchemy
+import app.pymsql
